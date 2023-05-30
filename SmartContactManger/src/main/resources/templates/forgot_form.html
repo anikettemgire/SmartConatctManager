@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+      <div class="container mt-5">
+			<div class="row">
+			   <div class="col-md-6 offset-md-3">
+			      <div class="col-md-12">
+			         <div class="card mt-5">
+			           <div class="card-body">
+			           	<div th:if="${session.msg}" th:classappend="${session.msg.type}"
+						class="alert" role="alert">
+						<p class="text-center" th:text="${session.msg.content}"></p>
+						<th:block th:text="${#session.removeAttribute('msg')}">
+							</th>
+					</div>
+			           <div id="login" style="height: 200px;">
+			           <h1 class="text-center">Your Registered Email</h1>
+			           <form class="mt-5" th:action="@{/getmail}" method="post">
+			           <input type="email"  required name="mail" placeholder="Enter Vaild The Mail" class="form-control" >
+			           <div class="container text-center mt-3">
+			           <button type="submit" class="btn btn-warning">Send OTP</button>
+			           </div>
+			           </form>
+			           </div>
+			           </div>
+			         </div>
+			      </div>
+			   </div>
+				
+		   </div>
+	 </div>
+	</section>
+	
+</body>
+</html>

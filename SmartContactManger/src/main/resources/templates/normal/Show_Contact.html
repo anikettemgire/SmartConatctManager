@@ -1,0 +1,105 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title></title>
+</head>
+<body>
+	<section>
+
+		<div class="card ms-3 me-3">
+		<!-- Msg -->
+			<div th:if="${session.msg}" th:classappend="${session.msg.type}"
+				class="alert alert-dismissible fade show" role="alert">
+				<p class="text-center" th:text="${session.msg.content}"></p>
+				<th:block th:text="${#session.removeAttribute('msg')}">
+					</th>
+			</div>
+			<div class="card-body">
+				<h1 class="text-center">
+          <!-- TItlw -->
+					<i class="fa fa-address-book-o" style="font-size: 40px"
+						aria-hidden="true"></i> Your Contact
+				</h1>
+				<!-- Serach Function -->
+				<div class="search-containter my-4">
+				<input  onkeyup="search()"  id="se-input" type="text" class="form-control" placeholder="Search Contact">
+				</div>
+				<div class="search-result">
+				<!-- Result Show Here -->
+				<h1>This si yje </h1>
+				</div>
+				<!-- End Searc -->
+				<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Contact Id</th>
+							<th scope="col">Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Phone</th>
+							<th scope="col">Action</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="e:${Contact}">
+							<th scope="row" th:text="${'SCM' +e.cid}"></th>
+							<td><img class="myimage" th:src="@{'/image/'+${e.imgurl}}"
+								alt="photo"> <span th:text="${e.cname}"></span></td>
+							<td><a href="#" th:href="@{'/user/'+ ${e.cid }+'/contact'}">
+
+									<span th:text="${e.cemail}"></span>
+							</a></td>
+							<td th:text="${e.phoneString}">Otto</td>
+                        <!-- Delete And Update ACtion -->
+							<td>
+							<form method="post"  th:action="@{'/user/updateform/' +${e.cid}}">
+							 <button class="btn btn-primary btn-sm"><i
+								class="fa fa-pencil" aria-hidden="true"></i></button>
+								
+								</form>
+								 
+									<!-- Base Mdhi Cll Karnar Manun Apn Link Chanhe Keli Pipe MDhli Use Kel -->
+							    <a class="btn btn-danger btn-sm mt-1" th:onclick="|deletContat(${e.cid})|">
+								 <i class="fa fa-trash" aria-hidden="true"></i>
+							    </a>
+							</td>
+							<!-- EnD OF The Upadte And Delete Actiom -->
+						</tr>
+
+
+					</tbody>
+				</table>
+				</div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li th:if="${currentpage!=0}" class="page-item"><a
+							class="page-link" th:href="@{'/user/show/' + ${currentpage-1}}">Previous</a></li>
+
+						<li th:classappend="${currentpage==i-1 ? 'active' : ' '}"
+							th:each="i:${#numbers.sequence(1,totalpage)}" class="page-item"><a
+							class="page-link" th:href="@{'/user/show/' +${i-1}}"><span
+								th:text="${i}"></span></a></li>
+
+
+						<li th:if="${currentpage+1!=totalpage}" class="page-item"><a
+							class="page-link" th:href="@{'/user/show/' + ${currentpage+1}}">Next</a></li>
+					</ul>
+				</nav>
+			</div>
+
+		</div>
+		<!-- For THe Activetion -->
+		   <script>
+		  
+     $(document).ready(()=>{
+    	$(".item").removeClass("active");
+    	$("#view").addClass("active");
+     });
+    </script>
+	</section>
+</body>
+</html>

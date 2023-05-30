@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::Layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Add Page</title>
+</head>
+<body>
+<section>
+       <div class="card ms-4 me-2">
+           <div class="card-body">
+           	<h1 class="text-center">Add Contact</h1>
+           <div th:if="${session.msg}" th:classappend="${session.msg.type}"
+						class="alert alert-dismissible fade show" role="alert">
+						<p class="text-center" th:text="${session.msg.content}"></p>
+						<th:block th:text="${#session.removeAttribute('msg')}">
+							</th>
+					</div>
+           <div class="container-fluid mt-1">
+             <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form th:action="@{/user/saveContact}"  th:object=${contact} enctype="multipart/form-data" method="post" class="mt-2">
+                    
+                      <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text me-2">
+                                      <i class="fa fa-plus"   style="font-size:23px " aria-hidden="true"></i>  
+                                </div>
+                                
+                                
+                            </div>
+                            <input type="text" id="firstname" required name="cname"  placeholder="Enter Firstname Here "
+                          
+                           
+                               class="form-control" ><!-- th:classappend="${#fields.hasErrors('cname')?'is-invalid' :''}"
+                             <div class="invalid-feedback"
+                                   
+									th:each="s:${#fields.errors('cname')} " th:text="${s}"></div>-->
+
+							
+                        </div>
+                        <!-- Second name -->
+                            <div class="input-group mt-3">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text me-2">
+                                      <i class="fa fa-user"   style="font-size:23px " aria-hidden="true"></i>  
+                                </div>
+                                
+                            </div>
+                            <input type="text" id="Secondname" required name="cnickname" placeholder="Enter Nickname Here " class="form-control">
+                        </div>
+                        <!-- Phone no -->
+                         <div class="input-group mt-3">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text me-2">
+                                      <i class="fa fa-phone"   style="font-size:23px " aria-hidden="true"></i>  
+                                </div>
+                                
+                            </div>
+                            <input type="number" id=" phoneString" required name=" phoneString" placeholder="Enter Phoneno here " class="form-control">
+                        </div>
+                        <!-- Email -->
+                          <div class="input-group mt-3">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text me-2">
+                                      <i class="fa fa-user"    style="font-size:23px " aria-hidden="true"></i>  
+                                </div>
+                                
+                            </div>
+                            <input type="email" id=" em" required name="cemail" placeholder="Enter Email here " class="form-control">
+                        </div>
+                            <!-- Work-->
+                          <div class="input-group mt-3">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text me-2">
+                                      <i class="fa fa-briefcase"    style="font-size:23px " aria-hidden="true"></i>  
+                                </div>
+                                
+                            </div>
+                            <input type="text" id="wo" required name="work" placeholder="Enter Wrok here " class="form-control">
+                        </div>
+                        <!-- Descrpition -->
+                        <div class="form-group mt-3">
+                          <textarea id="mytextarea" placeholder="Enter Contact Descrptiom" name="descrip" class="form-control" rows="10"></textarea>
+                        </div>
+                         <div class="form-group mt-2">
+                        <input type="file"  name="imgurl">
+                
+                        </div>
+                        
+                        <div class="container text-center mt-2">
+                        <button type="submit" class="btn btn-outline-primary">Save Contact</button>
+                        </div>
+                    </form>
+                </div>
+             </div>
+           </div>
+           </div>
+       
+       </div>
+       <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
+     
+        <script>
+     $(document).ready(()=>{
+    	$(".item").removeClass("active");
+    	$("#add").addClass("active");
+     });
+    </script>
+</section>
+	
+</body>
+</html>

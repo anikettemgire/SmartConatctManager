@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::Layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Home Page</title>
+</head>
+<body>
+<section>
+ 
+    <div class="container">
+       <div class="card">
+         <div th:if="${session.msg}" th:classappend="${session.msg.type}"
+						class="alert alert-dismissible fade show" role="alert">
+						<p class="text-center" th:text="${session.msg.content}"></p>
+						<th:block th:text="${#session.removeAttribute('msg')}">
+							</th>
+					</div>
+          <div class="card-body ms-4 " >
+        <div class="container text-center ">
+       
+	           <img class="myimage" style="height: 250px; width: 350px;"
+						alt="Not FO" th:src="@{'/image/contact2.jpg'}">
+						</div>
+						<h1 class="text-center mt-3 text-secondary font-weight-light">
+						Start Adding Your Contact On Cloud....
+						</h1>
+					
+						<a th:href="@{/user/add}"class="btn btn-primary mt-4 col-12 text-uppercase">Add New Contact</a>
+						<hr>
+						<!-- Payment form here -->
+						<h1>Payemt Here</h1>
+						
+					
+						<input id="pymentfield" type="text" name="" placeholder="Enter Amout" class="form-control">
+						<div class="container text-center mt-2">
+						<button onclick="paymentStart()" type="submit" class="btn btn-primary col-md-12">Pay</button>
+						</div>
+					
+          </div>
+       </div>
+    </div>
+    <script>
+     $(document).ready(()=>{
+    	$(".item").removeClass("active");
+    	$("#home").addClass("active");
+     });
+    </script>
+</section>
+	
+</body>

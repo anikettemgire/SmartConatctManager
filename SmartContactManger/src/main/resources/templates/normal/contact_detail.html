@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title></title>
+</head>
+<body>
+	<section>
+	<!-- Jeva Fakt Tycha Data ASe THy Sathi IF -->
+	<div th:if="${session.msg}" th:classappend="${session.msg.type}"
+				class="alert alert-dismissible fade show" role="alert">
+				<p class="text-center" th:text="${session.msg.content}"></p>
+				<th:block th:text="${#session.removeAttribute('msg')}">
+					</th>
+			</div>
+		<div class="card ms-4 me-4" th:if="${contact}">
+		
+			<div class="card-body" >
+
+				<div class="container text-center">
+					<img class="myimage" style="height: 200px; width: 200px;"
+						alt="Not FO" th:src="@{'/image/'+${contact.imgurl}}">
+					<h3 class="mt-2">
+						<i class="fa fa-user" aria-hidden="true"></i> <span
+							th:text="${contact.cname}"> </span> (<span
+							th:text="${contact.cnickname}"> </span>)
+					</h3>
+						<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#ID</th>
+								<th scope="col">SCMUSER<span th:text="${contact.cid}"></span></th>
+						
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">Email</th>
+								<td><span th:text="${contact.cemail}"></span></td>
+						
+							</tr>
+							<tr>
+								<th scope="row">Phone</th>
+								<td><span th:text="${contact.phoneString}"></span></td>
+						
+							</tr>
+							<tr>
+								<th scope="row">Work</th>
+								<td><span th:text="${contact.work}"></span></td>
+						
+							</tr>
+							
+
+						</tbody>
+					
+					</table>
+					</div>
+						<div class="desc">
+						<th:block th:utext="${contact. descrip}"></th:block>
+						</div>
+						<div class="container mt-2 d-grid gap-2 col-12 mx-auto">
+					      <form method="post"  th:action="@{'/user/updateform/' +${contact.cid}}">
+							 <button class="btn btn-primary btn-sm btn-block col-12">Update</button>
+								
+								</form>
+						 <a	class="btn btn-danger btn-sm btn-block" th:onclick="|deletContat(${contact.cid})|"> Delete</a>
+									
+						</div>
+
+				</div>
+			</div>
+			
+		</div>
+		<h1 class="text-center p-3 bg-danger text-white" th:unless="${contact}">You Don't Have Premisson To See Other Detail</h1>
+	</section>
+
+</body>
+</html>

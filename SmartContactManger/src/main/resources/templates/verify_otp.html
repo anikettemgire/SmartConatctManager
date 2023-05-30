@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+      <div class="container mt-5">
+			<div class="row">
+			   <div class="col-md-6 offset-md-3">
+			      <div class="col-md-12">
+			         <div class="card mt-5">
+			            	<div th:if="${session.msg}" th:classappend="${session.msg.type}"
+						class="alert" role="alert">
+						<p class="text-center" th:text="${session.msg.content}"></p>
+						<th:block th:text="${#session.removeAttribute('msg')}">
+							</th>
+					</div>
+			           <div class="card-body">
+			           <div id="login" style="height: 200px;">
+			       <div class="alert alert-success" role="alert">
+                       We Have Send The Otp On Email.....
+                     </div>
+			           <form class="mt-5" th:action="@{/verifotp}" method="post">
+			           <input type="text"  required name="otp" placeholder="Enter OTP " class="form-control" >
+			           <div class="container text-center mt-3">
+			           <button type="submit" class="btn btn-primary">Verif OTP</button>
+			           </div>
+			           </form>
+			           </div>
+			           </div>
+			         </div>
+			      </div>
+			   </div>
+				
+		   </div>
+	 </div>
+	</section>
+
+	
+</body>
+</html>
